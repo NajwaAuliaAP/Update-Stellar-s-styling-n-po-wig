@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .invoice-box {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #4CAF50;
+            border-radius: 5px;
+            max-width: 500px;
+        }
+        .invoice-details {
+            margin-top: 15px;
+            line-height: 1.6;
+        }
+    </style>
+    <title>Struk/Invoice - Toko Wig Kami</title>
+</head>
+<body>
+    <header>
+        <h1>Struk/Invoice</h1>
+    </header>
+    <section class="invoice-box">
+        <h2>Rincian Pembelian</h2>
+        <div class="invoice-details">
+            <p><b>Nama:</b> <span id="invoiceName"></span></p>
+            <p><b>Email:</b> <span id="invoiceEmail"></span></p>
+            <p><b>Item:</b> <span id="invoiceProduct"></span></p>
+            <p><b>Harga Produk:</b> <span id="invoicePrice" style="float: right;">Rp 0</span></p>
+            <p><b>Biaya Kirim:</b> <span id="shippingCost" style="float: right;">Rp 15.000</span></p>
+            <hr>
+            <p><b>Total:</b> <span id="invoiceTotal" style="float: right; font-weight: bold;">Rp 0</span></p>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2023 Toko Wig Kami. Semua hak dilindungi.</p>
+    </footer>
+	
+<script>
+function getInvoiceData() {
+    return {
+        name: localStorage.getItem('invoiceName') || 'Tidak tersedia',
+        email: localStorage.getItem('invoiceEmail') || 'Tidak tersedia',
+        product: localStorage.getItem('invoiceProduct') || 'Tidak tersedia',
+        price: localStorage.getItem('invoicePrice') || '0'
+    };
+}
+
+function displayInvoice(data) {
+    document.getElementById('invoiceName').textContent = data.name;
+    document.getElementById('invoiceEmail').textContent = data.email;
+    document.getElementById('invoiceProduct').textContent = data.product;
+
+    let price = parseInt(data.price);
+    if (isNaN(price)) price = 0;
+
+    document.getElementById('invoicePrice').textContent = 'Rp ' + price.toLocaleString('id-ID');
+
+    const shippingCost = 15000;
+    const total = price + shippingCost;
+
+    document.getElementById('shippingCost').textContent = 'Rp ' + shippingCost.toLocaleString('id-ID');
+    document.getElementById('invoiceTotal').textContent = 'Rp ' + total.toLocaleString('id-ID');
+}
+
+window.onload = function() {
+    const invoiceData = getInvoiceData();
+    displayInvoice(invoiceData);
+};
+</script>
+   </body>
+</html>

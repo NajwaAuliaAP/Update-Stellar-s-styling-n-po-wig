@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>Transaksi - Toko Wig Kami</title>
+</head>
+<body>
+    <header>
+        <h1>Input Transaksi</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="products.html">Produk/Jasa</a></li>
+            <li><a href="transaction.html">Transaksi</a></li>
+            <li><a href="contact.html">Kontak Kami</a></li>
+            <li><a href="about.html">Tentang Kami</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>Form Transaksi</h2>
+        <form id="transactionForm">
+            <label for="name">Nama:</label>
+            <input type="text" id="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+            <label for="product">Produk:</label>
+            <select id="product" required>
+                <option value="">Pilih Produk</option>
+                <option value="Styling Wig Karakter Anime| 300000">Styling Wig Karakter Anime (Rp300,000)</option>
+                <option value="Pre-Order Wig Cosplay| 250000">Pre-Order Wig Cosplay (Rp250,000)</option>
+                <option value="Perawatan & Cuci Wig| 80000">Perawatan & Cuci Wig (Rp80,000)</option>
+            </select>
+		
+            <button type="submit">Checkout/Buat Pesanan</button>
+        </form>
+        
+<script>
+document.getElementById('transactionForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const productValue = document.getElementById('product').value;
+
+    // Pisahkan: nama produk | harga
+    const [productName, productPrice] = productValue.split('|');
+
+    // Simpan ke localStorage
+    localStorage.setItem('invoiceName', name);
+    localStorage.setItem('invoiceEmail', email);
+    localStorage.setItem('invoiceProduct', productName); // hanya nama
+    localStorage.setItem('invoicePrice', productPrice);   // hanya harga
+
+    window.location.href = 'invoice.html';
+});
+</script>
+    </main>
+    <footer>
+         <p>&copy; 2025 Stellar's Styling & Pre-Order Wig</p>
+    </footer>
+</body>
+</html>
